@@ -1,0 +1,10 @@
+.form-input-content{
+  height: 350px;
+  border: 1px solid #ccc;
+  padding-left: 10px;
+   padding-top: 10px;
+  font-size: 16px;
+  width: 100%;
+  -webkit-appearance: none;
+  background: transparent;
+}

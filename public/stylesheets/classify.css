@@ -1,0 +1,9 @@
+#Add{
+text-decoration: underline;
+color: blueviolet;
+}
+.delete{
+  text-decoration: underline;
+  color: blueviolet;
+  cursor: pointer;
+}
