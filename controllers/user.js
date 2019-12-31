@@ -2,24 +2,25 @@ const User = require('./../models/user.js');
 const {formatTime}  = require('./../utils/formdate.js');
 
 const userController = {
-  show: async function(req,res,next){
+  all: async function(req,res,next){
     try{
+      console.log(123)
       const users = await User.all();
         res.locals.users = users.map((data)=>{
         data.created_time = formatTime(data.created_time);
         return data
       });
-      res.render('admin/user');
+      res.json({ code: 200, data: users})
     }catch(e){
       console.log(e)
-      res.locals.error = e;
-      res.render('error',)
+      res.json({ code: 0, message: '内部错误' })
     }
   },
   insert: async function(req,res,next){
     let name = req.body.name;
     let phone = req.body.phone;
     let password = req.body.password;
+    console.log(name,phone,password)
     let created_time = new Date();
     if(!name || !phone || !password){
       res.json({ code: 0, message: '缺少必要参数' });
@@ -37,10 +38,11 @@ const userController = {
     }
   },
   update: async function(req,res,next){
-    let id = req.body.id;
+    let id = req.params.id;
     let name = req.body.name;
     let phone = req.body.phone;
     let password = req.body.password;
+    console.log(id,name,phone,password)
     if(!name || !id || !phone || !password){
       res.json({ code: 0, data: 'params empty!' });
       return
@@ -54,7 +56,7 @@ const userController = {
     }
   },
   delete: async function(req,res,next){
-    let id = req.body.id;
+    let id = req.params.id;
     if(!id){
       res.json({ code: 0, data: 'params empty!' });
       return

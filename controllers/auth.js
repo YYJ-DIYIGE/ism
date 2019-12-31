@@ -10,17 +10,19 @@ const authController = {
       return
     }
     try{
+
       const users = await User.select({phone,password});
       const user = users[0];
       if (user) {
+        let status = user.id;
         let auth_Code = phone + '\t' + password + '\t'+ user.id;
         auth_Code = authCodeFunc(auth_Code,'ENCODE');
-        res.cookie('ac', auth_Code, { maxAge: 24* 60 * 60 * 1000 ,httpOnly: true});
-        res.json({ code: 200, message: '登录成功！'})
+        res.json({ code: 200, message: '登录成功！', token: auth_Code, status})
       }else{
         res.json({code: 0, message: '登录失败，没有此用户!!!'});
       }
     }catch(e){
+      console.log(e)
       res.json({code: 0, message:'系统问题请管理员处理'});
     }
   },

@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 router.get('/exhibibtion',articleControllerer.renderexhibition);
 router.get('/index',authMiddleware,classifyControllerer.renderindex);
-router.get('/admin/user',authMiddleware,userControllerer.show);
+router.get('/admin/user',authMiddleware,userControllerer.all);
 router.get('/admin/user/:id/edit',authMiddleware,userControllerer.renderUserEdit);
 router.get('/admin/user/create',authMiddleware,userControllerer.renderUserCreate);
 router.get('/admin/classify',authMiddleware,classifyControllerer.show);

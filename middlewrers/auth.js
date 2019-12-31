@@ -3,7 +3,7 @@ const User = require('./../models/user.js');
 
 var middleAuth = async function(req,res,next){
     try{
-        let token = req.cookies.ac;
+        let token = req.headers.authorization;
         if(!token){
             res.json({
                 code:0,

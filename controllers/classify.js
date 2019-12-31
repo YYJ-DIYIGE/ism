@@ -5,11 +5,12 @@ const classifyController = {
     try{
       const Class = await Classify.all();
       res.locals.Class = Class;
-      res.render('admin/classify');
+      res.json({ code: 200, data: Class});
     }catch(e){
+      res.json({ code: 0, message: "内部错误"});
       console.log(e)
       res.locals.error = e;
-      res.render('error',)
+      res.render('error')
     }
   },
   insert: async function(req,res,next){
@@ -29,7 +30,7 @@ const classifyController = {
     }
   },
   update: async function(req,res,next){
-    let id = req.body.id;
+    let id = req.params.id;
     let name = req.body.name;
     if(!name || !id){
       res.json({ code: 0, data: 'params empty!' });
@@ -44,8 +45,7 @@ const classifyController = {
     }
   },
   delete: async function(req,res,next){
-    let id = req.body.id;
-    console.log(id)
+    let id = req.params.id;
     if(!id){
       res.json({ code: 0, data: 'params empty!' });
       return
